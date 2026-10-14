@@ -1,0 +1,48 @@
+# 服务端依赖的 MySQL / Redis。
+#
+# 端口刻意错开本机已有服务，避免冲突；改端口时 .env 里的 MYSQL_PORT / REDIS_PORT 要同步改。
+services:
+  mysql:
+    image: mysql:8
+    container_name: keel-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: keel_root
+      MYSQL_DATABASE: keel
+      MYSQL_USER: keel
+      MYSQL_PASSWORD: keel_pass
+      TZ: Asia/Shanghai
+    ports:
+      - "3307:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+08:00
+    volumes:
+      - keel-mysql-data:/var/lib/mysql
+      # 容器首次启动时自动执行 sql/ 下的建表脚本
+      - ./sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pkeel_root"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  redis:
+    image: redis:7-alpine
+    container_name: keel-redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - keel-redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  keel-mysql-data:
+  keel-redis-data:

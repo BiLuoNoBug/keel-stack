@@ -1,0 +1,33 @@
+{
+  "name": "keel-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Keel 三端工程骨架 · Node.js 服务端（Koa + MySQL + Redis + Socket.IO）",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "db:migrate": "node src/db/migrate.js",
+    "db:seed": "node src/db/seed.js",
+    "db:reset": "node src/db/reset.js"
+  },
+  "dependencies": {
+    "@koa/cors": "^5.0.0",
+    "@koa/multer": "^3.0.2",
+    "@koa/router": "^13.1.0",
+    "bcryptjs": "^2.4.3",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
+    "ioredis": "^5.4.2",
+    "jsonwebtoken": "^9.0.2",
+    "koa": "^2.15.3",
+    "koa-body": "^6.0.1",
+    "koa-mount": "^4.2.0",
+    "koa-static": "^5.0.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.12.0",
+    "nanoid": "^5.0.9",
+    "socket.io": "^4.8.1",
+    "zod": "^3.24.1"
+  }
+}

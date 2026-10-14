@@ -1,0 +1,158 @@
+:root {
+  --df-brand: #ff6b35;
+  --df-mint: #33bfb5;
+  --df-ink: #171725;
+  --df-muted: #7a7a8c;
+  --df-bg: #f4f5fa;
+  --df-card: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif;
+  background: var(--df-bg);
+  color: var(--df-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 页面通用外框：每个 view 都以 .page 包一层，标题统一走 .page-head */
+.page {
+  padding: 20px 24px 32px;
+}
+
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.page-sub {
+  color: var(--df-muted);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* 指标卡：概览和版本页复用的轻量卡片 */
+.metric-card {
+  border-radius: 16px;
+  background: #fff;
+  padding: 18px 20px;
+  height: 100%;
+  border: 1px solid #eeeef3;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.metric-card:hover {
+  box-shadow: 0 8px 24px rgba(23, 23, 37, 0.06);
+  transform: translateY(-1px);
+}
+
+.metric-label {
+  color: var(--df-muted);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 10px;
+  letter-spacing: -0.5px;
+}
+
+.metric-foot {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--df-muted);
+}
+
+/* 状态点 */
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(23, 23, 37, 0.16);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(23, 23, 37, 0.28);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 新条目落表时的短暂高亮，给实时刷新一点视觉反馈 */
+@keyframes df-flash {
+  0% {
+    background-color: rgba(255, 107, 53, 0.16);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.row-flash > td {
+  animation: df-flash 1.6s ease-out 2;
+}
+
+/* 图片网格：媒体库和图片选择器共用 */
+.media-tile {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #eeeef3;
+  background: #fff;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.media-tile:hover {
+  box-shadow: 0 10px 26px rgba(23, 23, 37, 0.1);
+  transform: translateY(-2px);
+}
+
+.media-tile img {
+  width: 100%;
+  height: 132px;
+  object-fit: cover;
+  display: block;
+}
